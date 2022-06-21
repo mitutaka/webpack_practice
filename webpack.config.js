@@ -5,11 +5,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   devtool: "source-map",
-  entry: {
-    main: "./src/javascripts/main.js",
-  },
+  entry: "./src/javascripts/main.js",
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "javascripts/main.js",
@@ -26,7 +24,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(js|jsx)/,
+        test: /\.js/,
         exclude: /node_modules/,
         use: [
           {
@@ -41,14 +39,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.(css|scss|sass)$/,
+        test: /\.(css|sass|scss)/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader",
-            options: { sourceMap: true },
+            options: { sourceMap: false },
           },
           {
             loader: "sass-loader",
@@ -56,7 +54,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.png|\.jpg/,
+        test: /\.(png|jpg|jpeg)/,
         type: "asset/resource",
         generator: {
           filename: "images/[name][ext]",
