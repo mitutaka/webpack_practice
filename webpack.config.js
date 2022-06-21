@@ -2,12 +2,14 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   devtool: "source-map",
-  entry: "./src/javascripts/main.js",
+  entry: {
+    main: "./src/javascripts/main.js",
+  },
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "javascripts/main.js",
@@ -24,7 +26,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.js/,
+        test: /\.(js|jsx)/,
         exclude: /node_modules/,
         use: [
           {
@@ -39,16 +41,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.(css|sass|scss)/,
+        test: /\.(css|scss|sass)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader",
-            options: {
-              sourceMap: false,
-            },
+            options: { sourceMap: true },
           },
           {
             loader: "sass-loader",
@@ -56,14 +56,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|jpeg)/,
+        test: /\.png|\.jpg/,
         type: "asset/resource",
         generator: {
           filename: "images/[name][ext]",
         },
         use: [
           // {
-          //   loader: "file-loader",
+          //   loader: 'file-loader',
           //   options: {
           //     esModule: false,
           //     name: 'images/[name].[ext]',
