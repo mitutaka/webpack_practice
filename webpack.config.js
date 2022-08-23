@@ -23,15 +23,19 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|svg)/,
+        test: /\.(png|jpe?g|svg)/,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name][ext]",
+        },
         use: [
-          {
-            loader: "file-loader",
-            options: {
-              esModule: false,
-              name: "images/[name].[ext]",
-            },
-          },
+          // {
+          //   loader: "file-loader",
+          //   options: {
+          //     esModule: false,
+          //     name: "images/[name].[ext]",
+          //   },
+          // },
         ],
       },
     ],
